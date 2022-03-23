@@ -104,5 +104,8 @@ write-host "Creating database schema"
 Expand-Archive setup.zip ./
 sqlcmd -S "$synapseWorkspace.sql.azuresynapse.net" -U $sqlUser -P $sqlPassword -d $sqlDatabaseName -I -i setup.sql
 
+# Pause SQL Pool
+write-host "Pausing the $sqlDatabaseName SQL Pool..."
+Suspend-AzSynapseSqlPool -WorkspaceName $synapseWorkspace -Name $sqlDatabaseName
 
 write-host "Script completed at $(Get-Date)"
