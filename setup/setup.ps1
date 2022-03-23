@@ -89,7 +89,7 @@ $synapseWorkspace = "synapsews$suffix"
 
 write-host "Creating $synapseWorkspace Synapse Analytics workspace ..."
 New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName `
-  -TemplateFile "synapse.json" `
+  -TemplateFile "setup.json" `
   -Mode Complete `
   -workspaceName $synapseWorkspace `
   -uniqueSuffix $suffix `
@@ -100,7 +100,7 @@ New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName `
 
 # Create database
 write-host "Creating database schema"
-sqlcmd -S "$synapseWorkspace.sql.azuresynapse.net" -U $sqlUser -P $sqlPassword -d $sqlDatabaseName -I -i createdb.sql
+sqlcmd -S "$synapseWorkspace.sql.azuresynapse.net" -U $sqlUser -P $sqlPassword -d $sqlDatabaseName -I -i setup.sql
 
 
 Get-Date
