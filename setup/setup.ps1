@@ -1,4 +1,4 @@
-Get-Date
+write-host "Starting script at $(Get-Date)"
 
 Install-Module -Name Az.Synapse
 
@@ -67,6 +67,7 @@ $Region = $locations.Get($rand).Location
  $testServer = "testsql$suffix"
  while ($success -ne 1){
      try {
+         write-host "Trying $Region"
          $success = 1
          New-AzResourceGroup -Name $resourceGroupName -Location $Region | Out-Null
          New-AzSqlServer -ResourceGroupName $resourceGroupName -Location $Region -ServerName $testServer -ServerVersion "12.0" -SqlAdministratorCredentials $testCred -ErrorAction Stop | Out-Null
@@ -87,7 +88,7 @@ Write-Host "Selected region: $Region"
 # Create Synapse workspace
 $synapseWorkspace = "synapsews$suffix"
 
-write-host "Creating $synapseWorkspace Synapse Analytics workspace ..."
+write-host "Creating $synapseWorkspace Synapse Analytics workspace in $resourceGroupName resource group..."
 New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName `
   -TemplateFile "setup.json" `
   -Mode Complete `
@@ -104,4 +105,4 @@ Expand-Archive setup.zip ./
 sqlcmd -S "$synapseWorkspace.sql.azuresynapse.net" -U $sqlUser -P $sqlPassword -d $sqlDatabaseName -I -i setup.sql
 
 
-Get-Date
+write-host "Script completed at $(Get-Date)"
