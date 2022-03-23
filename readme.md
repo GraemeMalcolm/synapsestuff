@@ -14,13 +14,13 @@ You'll need an [Azure subscription](https://azure.microsoft.com/free)!
 4. In the PowerShell pane, enter the following command to clone this repo:
 
     ```
-    git clone https://git.com/GraemeMalcolm/synapsestuff
+    git clone https://github.com/GraemeMalcolm/synapsestuff dp-500
     ```
 
 5. After the repo has been cloned, enter the following commands to change to the **setup** folder and run the **setup.ps1** script it contains:
 
     ```
-    cd setup
+    cd dp-500/setup
     ./setup.ps1
     ```
 
