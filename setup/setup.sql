@@ -370,7 +370,7 @@ CREATE TABLE [dbo].[FactResellerSales](
 	[CarrierTrackingNumber] [nvarchar](25) NULL,
 	[CustomerPONumber] [nvarchar](25) NULL,
 	[RevisionNumber] [tinyint] NOT NULL)
-
+GO
 
 CREATE VIEW [dbo].[vFactSales]
 AS
