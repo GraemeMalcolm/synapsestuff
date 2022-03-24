@@ -24,7 +24,7 @@ You'll need an [Azure subscription](https://azure.microsoft.com/free)!
     ./setup.ps1
     ```
 
-6. When prompted, enter a suitable password to be set for your Azure Synapse SQl pool.
+6. When prompted, enter a suitable password to be set for your Azure Synapse SQL pool.
 
     > **Note**: Be sure to remember this password!
 
