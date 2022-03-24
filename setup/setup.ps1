@@ -110,7 +110,7 @@ Get-ChildItem "./data" -File | Foreach-Object {
     write-host ""
     $file = $_.Name
     Write-Host "$file"
-    bcp "dbo.$file" in $_.FullName -S "$synapseWorkspace.sql.azuresynapse.net" -U $sqlUser -P $sqlPassword -d $sqlDatabaseName -q -k -c -E
+    bcp "dbo.$file" in $_.FullName -S "$synapseWorkspace.sql.azuresynapse.net" -U $sqlUser -P $sqlPassword -d $sqlDatabaseName -q -k -w -E
 }
 
 # Pause SQL Pool
