@@ -108,7 +108,7 @@ write-host "Loading data..."
 foreach($file in Get-ChildItem "./data")
 {
     Write-Host "$file"
-    bcp "dbo.$file" in $file -S "$synapseWorkspace.sql.azuresynapse.net" -U -U $sqlUser -P $sqlPassword -d $sqlDatabaseName
+    bcp "dbo.$file" in $file -S "$synapseWorkspace.sql.azuresynapse.net" -U $sqlUser -P $sqlPassword -d $sqlDatabaseName
 }
 
 # Pause SQL Pool
