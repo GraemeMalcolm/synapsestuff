@@ -356,16 +356,17 @@ CREATE TABLE [dbo].[FactResellerSales](
 	[CustomerPONumber] [nvarchar](25) NULL,
 	[RevisionNumber] [tinyint] NOT NULL)
 GO
+
 CREATE VIEW [dbo].[vFactSales]
 AS
 	SELECT
-		N'Reseller' AS NVARCHAR(10)) AS [Channel]
-		,RIGHT([SalesOrderNumber], (LEN([SalesOrderNumber]) - 2)) AS INT) AS [SalesOrderKey]
-		,((RIGHT([SalesOrderNumber], (LEN([SalesOrderNumber]) - 2)) AS INT) * 1000) + [SalesOrderLineNumber]) AS [SalesOrderLineKey]
+		CAST(N'Reseller' AS NVARCHAR(10)) AS [Channel]
+		,CAST(RIGHT([SalesOrderNumber], (LEN([SalesOrderNumber]) - 2)) AS INT) AS [SalesOrderKey]
+		,((CAST(RIGHT([SalesOrderNumber], (LEN([SalesOrderNumber]) - 2)) AS INT) * 1000) + [SalesOrderLineNumber]) AS [SalesOrderLineKey]
 		,[SalesOrderNumber]
 		,[SalesOrderLineNumber]
 		,[ResellerKey]
-		,-1 AS INT) AS [CustomerKey]
+		,CAST(-1 AS INT) AS [CustomerKey]
 		,[ProductKey]
 		,[OrderDateKey]
 		,[DueDateKey]
@@ -391,12 +392,12 @@ AS
 		[dbo].[FactResellerSales]
 	UNION ALL
 	SELECT
-		N'Internet' AS NVARCHAR(10)) AS [Channel]
-		,RIGHT([SalesOrderNumber], (LEN([SalesOrderNumber]) - 2)) AS INT) AS [SalesOrderKey]
-		,((RIGHT([SalesOrderNumber], (LEN([SalesOrderNumber]) - 2)) AS INT) * 1000) + [SalesOrderLineNumber]) AS [SalesOrderLineKey]
+		CAST(N'Internet' AS NVARCHAR(10)) AS [Channel]
+		,CAST(RIGHT([SalesOrderNumber], (LEN([SalesOrderNumber]) - 2)) AS INT) AS [SalesOrderKey]
+		,((CAST(RIGHT([SalesOrderNumber], (LEN([SalesOrderNumber]) - 2)) AS INT) * 1000) + [SalesOrderLineNumber]) AS [SalesOrderLineKey]
 		,[SalesOrderNumber]
 		,[SalesOrderLineNumber]
-		,-1 AS INT) AS [ResellerKey]
+		,CAST(-1 AS INT) AS [ResellerKey]
 		,[CustomerKey]
 		,[ProductKey]
 		,[OrderDateKey]
@@ -405,7 +406,7 @@ AS
 		,[PromotionKey]
 		,[CurrencyKey]
 		,[SalesTerritoryKey]
-		,-1 AS INT) AS [EmployeeKey]
+		,CAST(-1 AS INT) AS [EmployeeKey]
 		,[OrderQuantity]
 		,[UnitPrice]
 		,[ExtendedAmount]
