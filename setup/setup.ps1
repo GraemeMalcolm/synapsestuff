@@ -1,3 +1,4 @@
+cls
 write-host "Starting script at $(Get-Date)"
 
 Install-Module -Name Az.Synapse
