@@ -16,7 +16,7 @@ while ($complexPassword -ne 1)
     $SqlPassword = Read-Host "Enter a password to use for your database server.
     `The password must meet complexity requirements:
     ` - Minimum 8 characters. 
-    ` - At least one upper case English letter [A-Z
+    ` - At least one upper case English letter [A-Z]
     ` - At least one lower case English letter [a-z]
     ` - At least one digit [0-9]
     ` - At least one special character (!,@,#,%,^,&,$)
