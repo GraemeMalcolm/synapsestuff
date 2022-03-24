@@ -13,7 +13,7 @@ $complexPassword = 0
 
 while ($complexPassword -ne 1)
 {
-    $SqlPassword = Read-Host "Enter a password to use for your database server.
+    $SqlPassword = Read-Host "Enter a password to use for the $sqlUser login.
     `The password must meet complexity requirements:
     ` - Minimum 8 characters. 
     ` - At least one upper case English letter [A-Z]
@@ -101,7 +101,7 @@ New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName `
   -Force
 
 # Create database
-write-host "Creating database schema..."
+write-host "Creating the $sqlDatabaseName database..."
 sqlcmd -S "$synapseWorkspace.sql.azuresynapse.net" -U $sqlUser -P $sqlPassword -d $sqlDatabaseName -I -i setup.sql
 
 # Load data
