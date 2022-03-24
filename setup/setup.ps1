@@ -106,11 +106,12 @@ sqlcmd -S "$synapseWorkspace.sql.azuresynapse.net" -U $sqlUser -P $sqlPassword -
 
 # Load data
 write-host "Loading data..."
-Get-ChildItem "./data" -File | Foreach-Object {
+Get-ChildItem "./data/*.txt" -File | Foreach-Object {
     write-host ""
-    $file = $_.Name
+    $file = $_.FullName
     Write-Host "$file"
-    bcp "dbo.$file" in $_.FullName -S "$synapseWorkspace.sql.azuresynapse.net" -U $sqlUser -P $sqlPassword -d $sqlDatabaseName -q -k -w -E
+    $table = $_.Name.Replace(".txt","")
+    bcp dbo.$table in $file -S "$synapseWorkspace.sql.azuresynapse.net" -U $sqlUser -P $sqlPassword -d $sqlDatabaseName -f $file.Replace("txt", "fmt") -q -k -E -b 5000
 }
 
 # Pause SQL Pool
