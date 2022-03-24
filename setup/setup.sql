@@ -27,10 +27,7 @@ CREATE TABLE [dbo].[FactInternetSales](
 	[CustomerPONumber] [nvarchar](25) NULL,
 	[RevisionNumber] [tinyint] NOT NULL
 )
-WITH  
-  (   
-    CLUSTERED INDEX (SalesOrderNumber)  
-  ); 
+
 GO
 CREATE TABLE [dbo].[DimCustomer](
 	[CustomerKey] [int] IDENTITY(1,1) NOT NULL,
@@ -63,10 +60,7 @@ CREATE TABLE [dbo].[DimCustomer](
 	[DateFirstPurchase] [date] NULL,
 	[CommuteDistance] [nvarchar](15) NULL
 )
-WITH  
-  (   
-    CLUSTERED INDEX (CustomerKey)  
-  ); 
+
 GO
 CREATE TABLE [dbo].[DimDate](
 	[DateKey] [int] NOT NULL,
@@ -89,10 +83,7 @@ CREATE TABLE [dbo].[DimDate](
 	[FiscalYear] [smallint] NOT NULL,
 	[FiscalSemester] [tinyint] NOT NULL
 )
-WITH  
-  (   
-    CLUSTERED INDEX (DateKey)  
-  ); 
+
 GO
 CREATE TABLE [dbo].[DimGeography](
 	[GeographyKey] [int] IDENTITY(1,1) NOT NULL,
@@ -106,10 +97,7 @@ CREATE TABLE [dbo].[DimGeography](
 	[PostalCode] [nvarchar](15) NULL,
 	[SalesTerritoryKey] [int] NULL,
 	[IpAddressLocator] [nvarchar](15) NULL)
-WITH  
-  (   
-    CLUSTERED INDEX (GeographyKey)  
-  ); 
+
 GO
 CREATE TABLE [dbo].[DimProduct](
 	[ProductKey] [int] IDENTITY(1,1) NOT NULL,
@@ -153,16 +141,14 @@ WITH
     CLUSTERED INDEX (ProductKey)  
   ); 
 GO
+
 CREATE TABLE [dbo].[DimProductCategory](
 	[ProductCategoryKey] [int] IDENTITY(1,1) NOT NULL,
 	[ProductCategoryAlternateKey] [int] NULL,
 	[EnglishProductCategoryName] [nvarchar](50) NOT NULL,
 	[SpanishProductCategoryName] [nvarchar](50) NOT NULL,
 	[FrenchProductCategoryName] [nvarchar](50) NOT NULL)
-WITH  
-  (   
-    CLUSTERED INDEX (ProductCategoryKey)  
-  ); 
+
 GO
 CREATE TABLE [dbo].[DimProductSubcategory](
 	[ProductSubcategoryKey] [int] IDENTITY(1,1) NOT NULL,
@@ -171,11 +157,8 @@ CREATE TABLE [dbo].[DimProductSubcategory](
 	[SpanishProductSubcategoryName] [nvarchar](50) NOT NULL,
 	[FrenchProductSubcategoryName] [nvarchar](50) NOT NULL,
 	[ProductCategoryKey] [int] NULL)
-WITH  
-  (   
-    CLUSTERED INDEX (ProductSubcategoryKey)  
-  ); 
 GO
+
 CREATE TABLE [dbo].[DimSalesTerritory](
 	[SalesTerritoryKey] [int] IDENTITY(1,1) NOT NULL,
 	[SalesTerritoryAlternateKey] [int] NULL,
@@ -387,11 +370,7 @@ CREATE TABLE [dbo].[FactResellerSales](
 	[CarrierTrackingNumber] [nvarchar](25) NULL,
 	[CustomerPONumber] [nvarchar](25) NULL,
 	[RevisionNumber] [tinyint] NOT NULL)
-WITH  
-  (   
-    CLUSTERED INDEX (SalesOrderNumber)  
-  ); 
-GO
+
 
 CREATE VIEW [dbo].[vFactSales]
 AS
@@ -477,29 +456,20 @@ CREATE TABLE [dbo].[DimAccount](
 	[CustomMembers] [nvarchar](300) NULL,
 	[ValueType] [nvarchar](50) NULL,
 	[CustomMemberOptions] [nvarchar](200) NULL)
-WITH  
-  (   
-    CLUSTERED INDEX (AccountKey)  
-  ); 
+
 GO
 CREATE TABLE [dbo].[DimCurrency](
 	[CurrencyKey] [int] IDENTITY(1,1) NOT NULL,
 	[CurrencyAlternateKey] [nchar](3) NOT NULL,
 	[CurrencyName] [nvarchar](50) NOT NULL,
 	[FormatString] [nvarchar](20) NULL)
-WITH  
-  (   
-    CLUSTERED INDEX (CurrencyKey)  
-  ); 
+
 GO
 CREATE TABLE [dbo].[DimDepartmentGroup](
 	[DepartmentGroupKey] [int] IDENTITY(1,1) NOT NULL,
 	[ParentDepartmentGroupKey] [int] NULL,
 	[DepartmentGroupName] [nvarchar](50) NULL)
-WITH  
-  (   
-    CLUSTERED INDEX (DepartmentGroupKey)  
-  ); 
+
 GO
 CREATE TABLE [dbo].[DimEmployee](
 	[EmployeeKey] [int] IDENTITY(1,1) NOT NULL,
@@ -544,10 +514,7 @@ CREATE TABLE [dbo].[DimOrganization](
 	[PercentageOfOwnership] [nvarchar](16) NULL,
 	[OrganizationName] [nvarchar](50) NULL,
 	[CurrencyKey] [int] NULL)
-WITH  
-  (   
-    CLUSTERED INDEX (OrganizationKey)  
-  ); 
+
 GO
 CREATE TABLE [dbo].[DimPromotion](
 	[PromotionKey] [int] IDENTITY(1,1) NOT NULL,
@@ -566,11 +533,8 @@ CREATE TABLE [dbo].[DimPromotion](
 	[EndDate] [datetime] NULL,
 	[MinQty] [int] NULL,
 	[MaxQty] [int] NULL)
-WITH  
-  (   
-    CLUSTERED INDEX (PromotionKey)  
-  ); 
 GO
+
 CREATE TABLE [dbo].[DimReseller](
 	[ResellerKey] [int] IDENTITY(1,1) NOT NULL,
 	[GeographyKey] [int] NULL,
@@ -592,29 +556,20 @@ CREATE TABLE [dbo].[DimReseller](
 	[MinPaymentAmount] [money] NULL,
 	[AnnualRevenue] [money] NULL,
 	[YearOpened] [int] NULL)
-WITH  
-  (   
-    CLUSTERED INDEX (ResellerKey)  
-  ); 
 GO
+
 CREATE TABLE [dbo].[DimSalesReason](
 	[SalesReasonKey] [int] IDENTITY(1,1) NOT NULL,
 	[SalesReasonAlternateKey] [int] NOT NULL,
 	[SalesReasonName] [nvarchar](50) NOT NULL,
 	[SalesReasonReasonType] [nvarchar](50) NOT NULL)
-WITH  
-  (   
-    CLUSTERED INDEX (SalesReasonKey)  
-  ); 
 GO
+
 CREATE TABLE [dbo].[DimScenario](
 	[ScenarioKey] [int] IDENTITY(1,1) NOT NULL,
 	[ScenarioName] [nvarchar](50) NULL)
-WITH  
-  (   
-    CLUSTERED INDEX (ScenarioKey)  
-  ); 
 GO
+
 CREATE TABLE [dbo].[FactCallCenter](
 	[FactCallCenterID] [int] IDENTITY(1,1) NOT NULL,
 	[DateKey] [int] NOT NULL,
@@ -629,21 +584,15 @@ CREATE TABLE [dbo].[FactCallCenter](
 	[IssuesRaised] [smallint] NOT NULL,
 	[AverageTimePerIssue] [smallint] NOT NULL,
 	[ServiceGrade] [float] NOT NULL)
-WITH  
-  (   
-    CLUSTERED INDEX (FactCallCenterID)  
-  ); 
 GO
+
 CREATE TABLE [dbo].[FactCurrencyRate](
 	[CurrencyKey] [int] NOT NULL,
 	[DateKey] [int] NOT NULL,
 	[AverageRate] [float] NOT NULL,
 	[EndOfDayRate] [float] NOT NULL)
-WITH  
-  (   
-    CLUSTERED INDEX (CurrencyKey)  
-  ); 
 GO
+
 CREATE TABLE [dbo].[FactFinance](
 	[FinanceKey] [int] IDENTITY(1,1) NOT NULL,
 	[DateKey] [int] NOT NULL,
@@ -653,21 +602,14 @@ CREATE TABLE [dbo].[FactFinance](
 	[AccountKey] [int] NOT NULL,
 	[Amount] [money] NOT NULL
 ) 
-WITH  
-  (   
-    CLUSTERED INDEX (FinanceKey)  
-  ); 
 GO
 
 CREATE TABLE [dbo].[FactInternetSalesReason](
 	[SalesOrderNumber] [nvarchar](20) NOT NULL,
 	[SalesOrderLineNumber] [tinyint] NOT NULL,
 	[SalesReasonKey] [int] NOT NULL)
-WITH  
-  (   
-    CLUSTERED INDEX (SalesOrderNumber)  
-  ); 
 GO
+
 CREATE TABLE [dbo].[FactProductInventory](
 	[ProductKey] [int] NOT NULL,
 	[DateKey] [int] NOT NULL,
@@ -675,10 +617,6 @@ CREATE TABLE [dbo].[FactProductInventory](
 	[UnitsIn] [int] NOT NULL,
 	[UnitsOut] [int] NOT NULL,
 	[UnitsBalance] [int] NOT NULL)
-WITH  
-  (   
-    CLUSTERED INDEX (ProductKey)  
-  ); 
 GO
 
 CREATE TABLE [dbo].[FactSalesQuota](
@@ -686,8 +624,5 @@ CREATE TABLE [dbo].[FactSalesQuota](
 	[EmployeeKey] [int] NOT NULL,
 	[DateKey] [int] NOT NULL,
 	[SalesAmountQuota] [money] NOT NULL)
-WITH  
-  (   
-    CLUSTERED INDEX (SalesQuotaKey)  
-  ); 
+
 GO
