@@ -28,4 +28,5 @@ You'll need an [Azure subscription](https://azure.microsoft.com/free)!
 
     > **Note**: Be sure to remember this password!
 
-7. Wait for the script to complete - this can take 15 minutes or so.
+7. Wait for the script to complete - this typically takes around 20 minutes; but in some cases may take longer.
+8. After creating the Synapse workspace and SQL Pool and loading the data, the script pauses the pool to prevent unnecessary Azure charges. When you're ready to work with your data in Azure Synapse Analytics, you'll need to resume the **sqldw** SQL Pool.
