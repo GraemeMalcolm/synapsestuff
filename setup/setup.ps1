@@ -111,6 +111,13 @@ foreach($file in Get-ChildItem "./data")
     bcp "dbo.$file" in $file -S "$synapseWorkspace.sql.azuresynapse.net" -U $sqlUser -P $sqlPassword -d $sqlDatabaseName -q
 }
 
+Get-ChildItem "./data" -File | Foreach-Object {
+    write-host ""
+    $file = $_.Name
+    Write-Host "$file"
+    bcp "dbo.$file" in $_.FullName -S "$synapseWorkspace.sql.azuresynapse.net" -U $sqlUser -P $sqlPassword -d $sqlDatabaseName -q -k -c -E
+}
+
 # Pause SQL Pool
 write-host "Pausing the $sqlDatabaseName SQL Pool..."
 Suspend-AzSynapseSqlPool -WorkspaceName $synapseWorkspace -Name $sqlDatabaseName

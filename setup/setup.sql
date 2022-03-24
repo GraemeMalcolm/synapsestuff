@@ -132,6 +132,10 @@ CREATE TABLE [dbo].[DimProduct](
 	[StartDate] [datetime] NULL,
 	[EndDate] [datetime] NULL,
 	[Status] [nvarchar](7) NULL)
+WITH  
+  (   
+    CLUSTERED INDEX (ProductKey)  
+  ); 
 GO
 CREATE TABLE [dbo].[DimProductCategory](
 	[ProductCategoryKey] [int] IDENTITY(1,1) NOT NULL,
@@ -155,6 +159,10 @@ CREATE TABLE [dbo].[DimSalesTerritory](
 	[SalesTerritoryCountry] [nvarchar](50) NOT NULL,
 	[SalesTerritoryGroup] [nvarchar](50) NULL,
 	[SalesTerritoryImage] [varbinary](max) NULL)
+WITH  
+  (   
+    CLUSTERED INDEX (SalesTerritoryKey)  
+  ); 
 GO
 
 
@@ -485,6 +493,10 @@ CREATE TABLE [dbo].[DimEmployee](
 	[EndDate] [date] NULL,
 	[Status] [nvarchar](50) NULL,
 	[EmployeePhoto] [varbinary](max) NULL)
+WITH  
+  (   
+    CLUSTERED INDEX (EmployeeKey)  
+  ); 
 GO
 CREATE TABLE [dbo].[DimOrganization](
 	[OrganizationKey] [int] IDENTITY(1,1) NOT NULL,
