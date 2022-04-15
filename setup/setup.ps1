@@ -59,32 +59,30 @@ $max_index = $locations.Count - 1
 $rand = (0..$max_index) | Get-Random
 $Region = $locations.Get($rand).Location
 
-# Try to create a SQL Database resource to test for capacity constraints
+# Test for subscription Azure SQL capacity constraints in randomly selected regions
 # (for some subsription types, quotas are adjusted dynamically based on capacity)
  $success = 0
  $tried_list = New-Object Collections.Generic.List[string]
- $testPassword = ConvertTo-SecureString $SqlPassword -AsPlainText -Force
- $testCred = New-Object System.Management.Automation.PSCredential ("SQLUser", $testPassword)
- $testServer = "testsql$suffix"
- while ($success -ne 1){
-     try {
-         write-host "Trying $Region"
-         $success = 1
-         New-AzResourceGroup -Name $resourceGroupName -Location $Region | Out-Null
-         New-AzSqlServer -ResourceGroupName $resourceGroupName -Location $Region -ServerName $testServer -ServerVersion "12.0" -SqlAdministratorCredentials $testCred -ErrorAction Stop | Out-Null
-     }
-     catch {
-       Remove-AzResourceGroup -Name $resourceGroupName -Force
-       $success = 0
-       $tried_list.Add($Region)
-       $locations = $locations | Where-Object {$_.Location -notin $tried_list}
-       $rand = (0..$($locations.Count - 1)) | Get-Random
-       $Region = $locations.Get($rand).Location
-     }
-}
-Remove-AzSqlServer -ResourceGroupName $resourceGroupName -ServerName $testServer | Out-Null
 
-Write-Host "Selected region: $Region"
+ while ($success -ne 1){
+    write-host "Trying $Region"
+    $capability = Get-AzSqlCapability -LocationName $Region
+    if($capability.Status -eq "Available")
+    {
+        $success = 1
+        write-host "Using $Region"
+    }
+    else
+    {
+        $success = 0
+        $tried_list.Add($Region)
+        $locations = $locations | Where-Object {$_.Location -notin $tried_list}
+        $rand = (0..$($locations.Count - 1)) | Get-Random
+        $Region = $locations.Get($rand).Location
+    }
+}
+Write-Host "Creating $resourceGroupName resource group in $Region ..."
+New-AzResourceGroup -Name $resourceGroupName -Location $Region | Out-Null
 
 # Create Synapse workspace
 $synapseWorkspace = "synapsews$suffix"
